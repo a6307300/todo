@@ -43,7 +43,7 @@ body {
     
 }
 .buttonOne__All {
-    background: url("./img/button.jpg");
+    /* background: url("../public/buttonAll.gif"); */
 width: 55px;
 height: 60px;
 background-repeat: no-repeat;

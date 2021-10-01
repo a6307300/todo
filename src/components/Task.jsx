@@ -1,23 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
+import ButtonActive from './ButtonActive';
 
-class Task extends React.Component {
-    render() {
-    return (
-        <div class="tasksSpace__task task">
-            <div class="container__button taskContainer">
-                <img class="imgNotDone" src="img/circle.gif" />
-                <button class="task__button"></button>
+function Task () {
+    const name = this.props.task.name;
+    const active = this.props.task.active;
+        if (active == true) {
+            return (
+                <div class="tasksSpace__task task">
+                <ButtonActive active={true}/>
+                <div class="task__label">{this.name}</div>
                 </div>
-            <div class="task__label">First task</div>
-            <div class="container__button taskContainer">
-                <img class="imgNotDone" src="img/Del.gif" />
-                <button class="task__button"></button>
-                </div>
-            </div>
-    );
+            )
+            }
 
-}
-}
-export default {Task};
+        if (active == false) {
+            return (
+                <div class="tasksSpace__task task">
+                   <ButtonActive active={false}/>
+                    <div class="task__label task__label_completed">{this.name}</div>
+                </div>
+            )
+        }
+        }
+export default Task;

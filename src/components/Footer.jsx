@@ -1,23 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
+import ButtonFooter from './ButtonFooter.jsx';
 
-class Footer extends React.Component {
-    render() {
+function Footer () {
+
+    
         return (
             <div class="footer">
         <div class = "footer__info">
             2 items left
         </div>
     <div class="footer__buttons buttons">
-        <button class="buttons__item">All</button>
-        <button class="buttons__item">Active</button>
-        <button class="buttons__item">Completed</button>
-        <button class="buttons__item buttons__item_padding"> ClearCompleted</button>
+        <ButtonFooter />
+        <ButtonFooter />
+        <ButtonFooter />
+        <ButtonFooter />
     </div>
     </div>
         );
     }
-}
 
-export default {Footer};
+export default Footer;

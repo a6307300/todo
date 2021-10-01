@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Task from './Task';
 import '../style.css';
 
-class TaskList extends React.Component {
-    render() {
+function TaskList() {
+    const [tasks, setTasks] = useState(tasks);
+
+    
     return (
-        <div class="tasksSpace">
-            <Task / >
-        </div>
+        <>
+        {(this.props.tasks).map(task => (<Task task={task}/>
+        ))}
+        </>
+
         );
         }
-        }
-        export default {TaskList};
+        export default TaskList;
