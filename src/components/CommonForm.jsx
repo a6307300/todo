@@ -6,18 +6,58 @@ import InputForm from './InputForm';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import '../style.css';
+import styled from "styled-components";
 
 // const idOne = nanoid(4);
 // const idTwo = nanoid(4);
 
 
-// const tasks = [
-//   { id: 0, name: 'First Task', active: true },
-//   { id: 1, name: 'Second Task', active: false },
-// ]
-
 
 function CommonForm() {
+
+    const ActiveArea = styled.div `
+    width: 550px;
+    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+    border: 1px solid;
+    border-color: rgb(241, 241, 241);
+    `
+    
+    const WorkArea = styled.div `
+    width: 550px;
+    border: 1px solid;
+    border-color: rgb(221, 221, 221);
+    `
+    
+    const DecorAreaOne = styled.div `
+    width: 550px;
+    height: 5px; 
+    display: flex; 
+    justify-content: center;
+    `
+    const DecorAreaOneInside = styled.div `
+    width: 540px;
+    height: 5px; 
+    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+    border: 1px solid;
+    border-color: rgb(185, 185, 185);
+    border-top: 0px;
+    ` 
+    const DecorAreaTwo = styled.div `
+    width: 550px;
+    height: 5px;
+    display: flex; 
+    justify-content: center;
+    `
+    const DecorAreaTwoInside = styled.div `
+    width: 530px;
+    height: 5px; 
+    padding-top: 0.3px;
+    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+    border: 1px solid;
+    border-color: rgb(185, 185, 185); 
+    border-top: 0px;
+    `
+
   const buttons = {
     all: "all",
     active: "active",
@@ -28,20 +68,30 @@ function CommonForm() {
   const [buttonAllActive, setButtonAllActive] = useState(false);
   const [inputText, setInputText] = useState("");
   const [filteredTasks, setFilteredTasks] = useState(tasks);
-  const [counterActive, setCounterActive] = useState(tasks.length)
+  const [counterActive, setCounterActive] = useState(tasks.length);
+  const [counterCompleted, setCounterCompleted] = useState(0);
 
   const countActive = () => {
-    const activeTasks = tasks.filter((task) => task.active == true)
+    const activeTasks = tasks.filter((task) => task.active === true)
     setCounterActive(activeTasks.length)
-    console.log(activeTasks.length)
   }
 
   useEffect(() => {
-    setFilteredTasks(tasks)
+    setCounterActive(countActive)
   }, [tasks])
 
+  const countCompleted = () => {
+    const completedTasks = tasks.filter((task) => task.active === false)
+    setCounterCompleted(completedTasks.length)
+  }
+
   useEffect(() => {
-    setCounterActive(countActive)
+    setCounterCompleted(countCompleted)
+  }, [tasks])
+
+
+  useEffect(() => {
+    setFilteredTasks(tasks)
   }, [tasks])
 
   const addTask = (inputText) => {
@@ -52,16 +102,16 @@ function CommonForm() {
         active: true,
       }
       setTasks(tasks.concat(newTask))
-      // setTasks(tasks.push(newTask))
-      // setTasks([...tasks, newTask])
-      // debugger
     }
   }
   const EnterClick = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       addTask(inputText)
       setInputText("")
 
+    }
+    if (e.key === "Escape") {
+      setInputText("")
     }
   }
   const handleChange = (e) => {
@@ -69,16 +119,14 @@ function CommonForm() {
   }
 
   const deleteTask = (id) => {
-    // setTasks(tasks.splice(id, 1))
     setTasks(tasks.filter((task) => task.id !== id))
   }
-  
+
   const changeStatus = (id) => {
     setTasks(tasks.map((task) =>
-      task.id == id ? { ...task, active: !task.active } : { ...task }
+      task.id === id ? { ...task, active: !task.active } : { ...task }
     )
     )
-    countActive();
   }
 
   const changeStatusAll = () => {
@@ -86,31 +134,29 @@ function CommonForm() {
       task.active = buttonAllActive;
     });
     setButtonAllActive(!buttonAllActive);
-    countActive();
   }
 
   const filterCompleted = () => {
-    const completedTasks = tasks.filter((task) => task.active == false)
+    const completedTasks = tasks.filter((task) => task.active === false)
     setFilteredTasks(completedTasks)
   }
 
   const filterActive = () => {
-    const activeTasks = tasks.filter((task) => task.active == true)
+    const activeTasks = tasks.filter((task) => task.active === true)
     setFilteredTasks(activeTasks)
   }
 
   const filterAll = () => {
-    const allTasks = tasks.filter((task) => (task.active == true || task.active == false));
+    const allTasks = tasks.filter((task) => (task.active === true || task.active === false));
     setFilteredTasks(allTasks)
   }
 
-  const deleteAllCompleted = () => {
-  setTasks(tasks.filter((task) => task.active == true))
-  }
+
+
 
   return (
-    <div className="window">
-      <div className="workSpace">
+    <ActiveArea>
+      <WorkArea>
         <InputForm
           buttonAllActive={buttonAllActive}
           inputText={inputText}
@@ -123,27 +169,28 @@ function CommonForm() {
           filteredTasks={filteredTasks}
           deleteTask={deleteTask}
           changeStatus={changeStatus}
+
         />
         <Footer
           filterCompleted={filterCompleted}
           filteredTasks={filteredTasks}
           filterActive={filterActive}
           filterAll={filterAll}
-          deleteAllCompleted={deleteAllCompleted}
           buttons={buttons}
+          tasks={tasks}
           counterActive={counterActive}
+          counterCompleted={counterCompleted}
+
         />
 
-        <div className="decor">
-          <div className="decor__inside">
-          </div>
-        </div>
-        <div className="decor2">
-          <div className="decor__inside2">
-          </div>
-        </div>
-      </div>
-    </div>
+        <DecorAreaOne>
+          <DecorAreaOneInside />
+        </DecorAreaOne>
+        <DecorAreaTwo>
+          <DecorAreaTwoInside />
+        </DecorAreaTwo>
+      </WorkArea>
+    </ActiveArea>
   );
 }
 export default CommonForm;
