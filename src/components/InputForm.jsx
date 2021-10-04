@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import ButtonAll from './ButtonAll';
 import '../style.css';
 
-function InputForm () {
+function InputForm ({inputText, EnterClick, handleChange, changeStatusAll}) {
     return (
-        <div class="workSpace__inputSpace inputArea">
-            <ButtonAll />
-            <input class="inputArea__text" type="text" placeholder="What needs to be done?" />
+        <div className="workSpace__inputSpace inputArea">
+            <ButtonAll changeStatusAll={changeStatusAll}/>
+            <input 
+              value={inputText}
+              onKeyDown={EnterClick}
+              onChange={handleChange}
+              className="inputArea__text" 
+              type="text" 
+              placeholder="What needs to be done?" />
         </div>
     );
 }

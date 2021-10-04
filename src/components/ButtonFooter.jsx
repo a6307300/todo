@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import '../style.css';
 
 
-function ButtonFooter () {
-
-    
+function ButtonFooter({ name, value, functionClick }) {
     return (
-        <button class="buttons__item">All</button>
+        <button
+            className="buttons__item"
+            value={value}
+            onClick={functionClick}>
+            {name}
+        </button>
     );
 }
 export default ButtonFooter;

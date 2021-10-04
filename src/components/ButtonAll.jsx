@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import '../style.css';
 
 
-class ButtonAll extends React.Component {
-    render() {
+function ButtonAll({changeStatusAll}) {
     return (
-        <div class="inputArea__button buttonOne">
-        <button class="buttonOne__All"><img src="../public/button.png" /></button>
+        <div className="inputArea__button buttonOne">
+        <button 
+        className="buttonOne__All"
+        onClick = {changeStatusAll}
+        >
+        <img src="images/button.jpg" />
+        </button>
         </div>
     );
     }
-}
 export default ButtonAll;

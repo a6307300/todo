@@ -2,17 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Task from './Task';
 import '../style.css';
+import { useState } from 'react';
 
-function TaskList() {
-    const [tasks, setTasks] = useState(tasks);
-
-    
-    return (
-        <>
-        {(this.props.tasks).map(task => (<Task task={task}/>
-        ))}
-        </>
-
+function TaskList({ filteredTasks, tasks, deleteTask, changeStatus }) {
+  return (
+    <div className="tasksSpace">
+      {filteredTasks.map((task) => {
+        return (
+          <Task
+            task={task}
+            deleteTask={deleteTask}
+            changeStatus={changeStatus}
+          />
         );
-        }
-        export default TaskList;
+      }
+      )
+      }
+    </div>
+  )
+}
+export default TaskList;

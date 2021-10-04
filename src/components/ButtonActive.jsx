@@ -2,20 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 
-function ButtonActive () {
-        const active = this.props.active;
-        if (active) {
+function ButtonActive({ id, changeStatus, active }) {
+    if (active) {
         return (
-            <div class="container__button taskContainer">
-            <img class="imgNotDone" src="/public/circle.jpg" />
+            <div className="container__button taskContainer">
+                <img className="imgNotDone"
+                    src="/images/circle.gif"
+                    onClick={()=> changeStatus(id)} 
+                    />
             </div>
         )
     } else {
         return (
-            <div class="container__button taskContainer">
-            <img class="imgNotDone" src="/public/circleDone.jpg" />
+            <div className="container__button taskContainer">
+                <img className="imgNotDone"
+                    src="images/circleDone.gif"
+                    onClick={() => changeStatus(id)}
+                />
             </div>
         )
     }
-    }
+}
 export default ButtonActive;

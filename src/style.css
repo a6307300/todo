@@ -51,6 +51,7 @@ background-size: cover;
 background-position: center;
 border-color: transparent;
 opacity: 0.3;
+background-color: white;
 }
 .buttonOne__All:active {
     opacity:1;
@@ -104,7 +105,15 @@ height: 50px;
     }
 .imgNotDone {
     position:absolute;
-    width: 48px;
+    width: 32px;
+    padding-top: 6px;
+    padding-left: 10px;
+}
+.opacity {
+    opacity:0;
+}
+.opacity:hover {
+    opacity:1;
 }
 .footer {
     background-color: white;
