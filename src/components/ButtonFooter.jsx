@@ -2,25 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
+import { useState } from 'react';
 
 
     
 
-function ButtonFooter({ name, value, functionClick, counterCompleted }) {
+function ButtonFooter({ name, value, functionClick, colorSelected, counterCompleted, opacity }) {
+    
 
     const ButtonFooterStyle = styled.button `
-    width: auto;
+    width: 100px;
     height: 35px;
     border-color: transparent;
-    background-color: white;
+    background-color: ${colorSelected};
     color: #929191;
+    opacity: ${opacity}
     
-    ::active {
-    border-color: red;
+    &:hover {
+        color: green;
     }
     
-    opacity: (value===buttons.clearCompleted && counterCompleted===0)? 0:1
     `
+   
+
+
 
     return (
         <ButtonFooterStyle

@@ -70,6 +70,12 @@ function CommonForm() {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [counterActive, setCounterActive] = useState(tasks.length);
   const [counterCompleted, setCounterCompleted] = useState(0);
+  const[colorSelectedAll, setColorSelectedAll]=useState('white');
+  const[colorSelectedActive, setColorSelectedActive]=useState('white');
+  const[colorSelectedCompleted, setColorSelectedCompleted]=useState('white');
+  const[colorSelectedClear, setColorSelectedAllClear]=useState('white');
+  const[opacityClear, setOpacityClear]=useState(0)
+
 
   const countActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
@@ -83,6 +89,7 @@ function CommonForm() {
   const countCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setCounterCompleted(completedTasks.length)
+    if (completedTasks.length>0) {setOpacityClear(1)}
   }
 
   useEffect(() => {
@@ -134,21 +141,39 @@ function CommonForm() {
       task.active = buttonAllActive;
     });
     setButtonAllActive(!buttonAllActive);
+
   }
 
   const filterCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setFilteredTasks(completedTasks)
+    setColorSelectedCompleted('green')
+    setColorSelectedAll('white')
+    setColorSelectedActive('white')
   }
 
   const filterActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
     setFilteredTasks(activeTasks)
+    setColorSelectedActive('green')
+    setColorSelectedCompleted('white')
+    setColorSelectedAll('white')
   }
 
   const filterAll = () => {
     const allTasks = tasks.filter((task) => (task.active === true || task.active === false));
     setFilteredTasks(allTasks)
+    setColorSelectedAll('green')
+    setColorSelectedActive('white')
+    setColorSelectedCompleted('white')
+  }
+
+  const deleteAllCompleted = () => {
+    tasks.filter((task) => task.active === true);
+    setFilteredTasks(tasks)
+    setColorSelectedActive('white')
+    setColorSelectedCompleted('white')
+    setColorSelectedAll('white')
   }
 
 
@@ -176,10 +201,16 @@ function CommonForm() {
           filteredTasks={filteredTasks}
           filterActive={filterActive}
           filterAll={filterAll}
+          deleteAllCompleted={deleteAllCompleted}
           buttons={buttons}
           tasks={tasks}
           counterActive={counterActive}
           counterCompleted={counterCompleted}
+          colorSelectedAll={colorSelectedAll}
+          colorSelectedActive={colorSelectedActive}
+          colorSelectedCompleted={colorSelectedCompleted}
+          colorSelectedClear={colorSelectedClear}
+          opacityClear={opacityClear}
 
         />
 

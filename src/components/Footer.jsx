@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 
 
-function Footer({ filterCompleted, filterActive, filterAll, buttons, counterActive, deleteAllCompleted, counterCompleted }) {
+function Footer({ filterCompleted, filterActive, filterAll, buttons, counterActive, deleteAllCompleted, counterCompleted, colorSelectedAll, colorSelectedActive, colorSelectedCompleted, colorSelectedClear, opacityClear }) {
         
     const FooterWrapper = styled.div `
     background-color: white;
@@ -41,10 +41,10 @@ function Footer({ filterCompleted, filterActive, filterAll, buttons, counterActi
                 {counterActive} items left
             </FooterInfo>
             <FooterButtons>
-                <ButtonFooter value={buttons.all} buttons={buttons} functionClick={filterAll} name="All" />
-                <ButtonFooter value={buttons.active} buttons={buttons} functionClick={filterActive} name="Active" />
-                <ButtonFooter value={buttons.completed} buttons={buttons} functionClick={filterCompleted} name="Completed" />
-                <ButtonFooter value={buttons.clearCompleted} buttons={buttons} functionClick={deleteAllCompleted} name={counterCompleted}/>
+                <ButtonFooter opacityClear={1} colorSelected={colorSelectedAll} value={buttons.all} buttons={buttons} functionClick={filterAll} name="All" />
+                <ButtonFooter opacityClear={1} colorSelected={colorSelectedActive} value={buttons.active} buttons={buttons} functionClick={filterActive} name="Active" />
+                <ButtonFooter opacityClear={1} colorSelected={colorSelectedCompleted} value={buttons.completed} buttons={buttons} functionClick={filterCompleted} name="Completed" />
+                <ButtonFooter opacityClear={opacityClear} colorSelected={colorSelectedClear} value={buttons.clearCompleted} buttons={buttons} functionClick={deleteAllCompleted} name={counterCompleted}/>
             </FooterButtons>
         </FooterWrapper>
     );
