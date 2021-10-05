@@ -5,14 +5,8 @@ import '../style.css';
 import styled from "styled-components";
 
 
-const TasksSpace = styled.div `
-background-color: white;
-width: 550px;
-display:flex;
-flex-flow: column nowrap;
-`
 
-function TaskList({ filteredTasks, deleteTask, changeStatus}) {
+const TaskList = ({ filteredTasks, deleteTask, changeStatus}) => {
     return (
     <TasksSpace>
       {filteredTasks.map((task) => {
@@ -29,4 +23,14 @@ function TaskList({ filteredTasks, deleteTask, changeStatus}) {
     </TasksSpace>
   )
 }
+
+const TasksSpace = styled.div `
+background-color: white;
+width: 550px;
+display:flex;
+flex-flow: column nowrap;
+@media (max-width: 599px) {
+width: 100%;
+`
+
 export default TaskList;

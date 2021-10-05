@@ -8,55 +8,9 @@ import { useState } from 'react';
 import '../style.css';
 import styled from "styled-components";
 
-// const idOne = nanoid(4);
-// const idTwo = nanoid(4);
 
+const CommonForm = () => {
 
-
-function CommonForm() {
-
-    const ActiveArea = styled.div `
-    width: 550px;
-    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
-    border: 1px solid;
-    border-color: rgb(241, 241, 241);
-    `
-    
-    const WorkArea = styled.div `
-    width: 550px;
-    border: 1px solid;
-    border-color: rgb(221, 221, 221);
-    `
-    
-    const DecorAreaOne = styled.div `
-    width: 550px;
-    height: 5px; 
-    display: flex; 
-    justify-content: center;
-    `
-    const DecorAreaOneInside = styled.div `
-    width: 540px;
-    height: 5px; 
-    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
-    border: 1px solid;
-    border-color: rgb(185, 185, 185);
-    border-top: 0px;
-    ` 
-    const DecorAreaTwo = styled.div `
-    width: 550px;
-    height: 5px;
-    display: flex; 
-    justify-content: center;
-    `
-    const DecorAreaTwoInside = styled.div `
-    width: 530px;
-    height: 5px; 
-    padding-top: 0.3px;
-    box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
-    border: 1px solid;
-    border-color: rgb(185, 185, 185); 
-    border-top: 0px;
-    `
 
   const buttons = {
     all: "all",
@@ -70,12 +24,8 @@ function CommonForm() {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [counterActive, setCounterActive] = useState(tasks.length);
   const [counterCompleted, setCounterCompleted] = useState(0);
-  const[colorSelectedAll, setColorSelectedAll]=useState('white');
-  const[colorSelectedActive, setColorSelectedActive]=useState('white');
-  const[colorSelectedCompleted, setColorSelectedCompleted]=useState('white');
-  const[colorSelectedClear, setColorSelectedAllClear]=useState('white');
-  const[opacityClear, setOpacityClear]=useState(0)
 
+  const [buttonActive, setButtonActive] = useState(buttons.all);
 
   const countActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
@@ -89,7 +39,6 @@ function CommonForm() {
   const countCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setCounterCompleted(completedTasks.length)
-    if (completedTasks.length>0) {setOpacityClear(1)}
   }
 
   useEffect(() => {
@@ -112,12 +61,12 @@ function CommonForm() {
     }
   }
   const EnterClick = (e) => {
-    if (e.key === "Enter") {
+    if (e.key == "Enter") {
       addTask(inputText)
       setInputText("")
 
     }
-    if (e.key === "Escape") {
+    if (e.key == "Escape") {
       setInputText("")
     }
   }
@@ -147,36 +96,25 @@ function CommonForm() {
   const filterCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setFilteredTasks(completedTasks)
-    setColorSelectedCompleted('green')
-    setColorSelectedAll('white')
-    setColorSelectedActive('white')
+    setButtonActive(buttons.completed)
   }
 
   const filterActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
     setFilteredTasks(activeTasks)
-    setColorSelectedActive('green')
-    setColorSelectedCompleted('white')
-    setColorSelectedAll('white')
+    setButtonActive(buttons.active)
   }
 
   const filterAll = () => {
     const allTasks = tasks.filter((task) => (task.active === true || task.active === false));
     setFilteredTasks(allTasks)
-    setColorSelectedAll('green')
-    setColorSelectedActive('white')
-    setColorSelectedCompleted('white')
+    setButtonActive(buttons.all)
   }
 
   const deleteAllCompleted = () => {
-    tasks.filter((task) => task.active === true);
-    setFilteredTasks(tasks)
-    setColorSelectedActive('white')
-    setColorSelectedCompleted('white')
-    setColorSelectedAll('white')
+    setTasks(tasks.filter((task) => task.active === true))
+    setButtonActive(buttons.clearCompleted)
   }
-
-
 
 
   return (
@@ -194,6 +132,7 @@ function CommonForm() {
           filteredTasks={filteredTasks}
           deleteTask={deleteTask}
           changeStatus={changeStatus}
+  
 
         />
         <Footer
@@ -206,22 +145,74 @@ function CommonForm() {
           tasks={tasks}
           counterActive={counterActive}
           counterCompleted={counterCompleted}
-          colorSelectedAll={colorSelectedAll}
-          colorSelectedActive={colorSelectedActive}
-          colorSelectedCompleted={colorSelectedCompleted}
-          colorSelectedClear={colorSelectedClear}
-          opacityClear={opacityClear}
+          buttonActive={buttonActive}
 
         />
-
+        </WorkArea>
         <DecorAreaOne>
           <DecorAreaOneInside />
         </DecorAreaOne>
         <DecorAreaTwo>
           <DecorAreaTwoInside />
         </DecorAreaTwo>
-      </WorkArea>
     </ActiveArea>
   );
 }
+
+const ActiveArea = styled.div `
+width: 550px;
+border: 1px solid;
+border-color: rgb(241, 241, 241);
+@media (max-width: 599px) {
+width: 100%;
+}
+`
+
+const WorkArea = styled.div `
+width: 550px;
+border: 1px solid;
+border-color: rgb(221, 221, 221);
+box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+@media (max-width: 599px) {
+width: 100%;
+`
+
+const DecorAreaOne = styled.div `
+width: 550px;
+height: 5px; 
+display: flex; 
+justify-content: center;
+@media (max-width: 599px) {
+width: 100%;
+`
+const DecorAreaOneInside = styled.div `
+width: 540px;
+height: 5px; 
+box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+border: 1px solid;
+border-color: rgb(185, 185, 185);
+border-top: 0px;
+@media (max-width: 599px) {
+width: 95%;
+` 
+const DecorAreaTwo = styled.div `
+width: 550px;
+height: 5px;
+display: flex; 
+justify-content: center;
+@media (max-width: 599px) {
+width: 100%;
+`
+const DecorAreaTwoInside = styled.div `
+width: 530px;
+height: 5px; 
+padding-top: 0.3px;
+box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
+border: 1px solid;
+border-color: rgb(185, 185, 185); 
+border-top: 0px;
+@media (max-width: 599px) {
+width: 93%;
+`
+
 export default CommonForm;

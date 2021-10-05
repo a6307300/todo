@@ -3,19 +3,7 @@ import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
 
-const ContainerImgActive = styled.div `
-width: 50px;
-height: 50px;
-`
-const ImgActive = styled.img `
-position:absolute;
-width: 32px;
-padding-top: 6px;
-padding-left: 10px;
-`
-
-
-function ButtonActive({ id, changeStatus, active }) {  
+const ButtonActive = ({ id, changeStatus, active }) => {  
 
 
 
@@ -39,4 +27,18 @@ function ButtonActive({ id, changeStatus, active }) {
         )
     }
 }
+
+
+const ContainerImgActive = styled.div `
+width: 50px;
+height: 50px;
+`
+const ImgActive = styled.img `
+position:absolute;
+width: 32px;
+padding-top: 12px;
+padding-left: 10px;
+`
+
+
 export default ButtonActive;
