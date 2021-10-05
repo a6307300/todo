@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import Task from './Task';
 import '../style.css';
 import styled from "styled-components";
-
-
-
 const TaskList = ({ filteredTasks, deleteTask, changeStatus}) => {
     return (
     <TasksSpace>

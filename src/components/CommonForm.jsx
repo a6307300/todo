@@ -24,7 +24,6 @@ const CommonForm = () => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [counterActive, setCounterActive] = useState(tasks.length);
   const [counterCompleted, setCounterCompleted] = useState(0);
-
   const [buttonActive, setButtonActive] = useState(buttons.all);
 
   const countActive = () => {
@@ -39,6 +38,7 @@ const CommonForm = () => {
   const countCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setCounterCompleted(completedTasks.length)
+    console.log (counterCompleted)
   }
 
   useEffect(() => {
@@ -132,7 +132,7 @@ const CommonForm = () => {
           filteredTasks={filteredTasks}
           deleteTask={deleteTask}
           changeStatus={changeStatus}
-  
+
 
         />
         <Footer
@@ -148,18 +148,18 @@ const CommonForm = () => {
           buttonActive={buttonActive}
 
         />
-        </WorkArea>
-        <DecorAreaOne>
-          <DecorAreaOneInside />
-        </DecorAreaOne>
-        <DecorAreaTwo>
-          <DecorAreaTwoInside />
-        </DecorAreaTwo>
+      </WorkArea>
+      <DecorAreaOne>
+        <DecorAreaOneInside />
+      </DecorAreaOne>
+      <DecorAreaTwo>
+        <DecorAreaTwoInside />
+      </DecorAreaTwo>
     </ActiveArea>
   );
 }
 
-const ActiveArea = styled.div `
+const ActiveArea = styled.div`
 width: 550px;
 border: 1px solid;
 border-color: rgb(241, 241, 241);
@@ -168,7 +168,7 @@ width: 100%;
 }
 `
 
-const WorkArea = styled.div `
+const WorkArea = styled.div`
 width: 550px;
 border: 1px solid;
 border-color: rgb(221, 221, 221);
@@ -177,7 +177,7 @@ box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
 width: 100%;
 `
 
-const DecorAreaOne = styled.div `
+const DecorAreaOne = styled.div`
 width: 550px;
 height: 5px; 
 display: flex; 
@@ -185,7 +185,7 @@ justify-content: center;
 @media (max-width: 599px) {
 width: 100%;
 `
-const DecorAreaOneInside = styled.div `
+const DecorAreaOneInside = styled.div`
 width: 540px;
 height: 5px; 
 box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
@@ -194,8 +194,8 @@ border-color: rgb(185, 185, 185);
 border-top: 0px;
 @media (max-width: 599px) {
 width: 95%;
-` 
-const DecorAreaTwo = styled.div `
+`
+const DecorAreaTwo = styled.div`
 width: 550px;
 height: 5px;
 display: flex; 
@@ -203,7 +203,7 @@ justify-content: center;
 @media (max-width: 599px) {
 width: 100%;
 `
-const DecorAreaTwoInside = styled.div `
+const DecorAreaTwoInside = styled.div`
 width: 530px;
 height: 5px; 
 padding-top: 0.3px;

@@ -6,41 +6,27 @@ import styled from "styled-components";
 
 
 const ButtonDelete = ({ task, deleteTask, opacityDel }) => {
-
-   const ContainerImgActive = styled.div `
-   width: 50px;
-   height: 50px;
-   `
-   const ImgActive = styled.img `
-   position:absolute;
-   width: 45px;
-   padding-top: 6px;
-   padding-left: 0px;
-   opacity: ${opacityDel};
-   z-index: 9;
-   `
-   // const DelButton = styled.button `
-   // width: 50px;
-   // height: 50px;
-   // opacity: 1;
-   // background-color: white;
-   // border-color: transparent;
-   // z-index: 11;
-   // }
-   // `
-
    return (
       <ContainerImgActive>
         <ImgActive src="images/Del.gif" 
+        opacityDel={opacityDel}
            onClick={() => deleteTask(task.id)}/>
       </ContainerImgActive>
    )
-
-
-   
 }
 
-
+const ContainerImgActive = styled.div `
+width: 50px;
+height: 50px;
+`
+const ImgActive = styled.img `
+position:absolute;
+width: 45px;
+padding-top: 6px;
+padding-left: 0px;
+opacity: ${props => props.opacityDel};
+z-index: 9;
+`
 
 
 export default ButtonDelete;

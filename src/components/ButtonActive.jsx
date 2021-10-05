@@ -4,9 +4,6 @@ import '../style.css';
 import styled from "styled-components";
 
 const ButtonActive = ({ id, changeStatus, active }) => {  
-
-
-
     if (active) {
         return (
             <ContainerImgActive>

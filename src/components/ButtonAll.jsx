@@ -8,19 +8,6 @@ import ButtonActive from './ButtonActive';
 
 
 const ButtonAll = ({ changeStatusAll, buttonAllActive }) => {
-
-    
-    const ButtonAllStyle = styled.button`
-    width: 55px;
-    height: 60px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-color: transparent;
-    opacity: ${buttonAllActive?1:0.3};
-    background-color: white;
-    `
-    
     return (
         <ContainerButtonAll>
             <ButtonAllStyle
@@ -38,6 +25,17 @@ width: 55px;
 height: 62px;
 background-color: white;
 `
+const ButtonAllStyle = styled.button`
+width: 55px;
+height: 60px;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+border-color: transparent;
+opacity: ${(props => props.buttonAllActive)?0.3:1};
+background-color: white;
+`
+
 
 
 

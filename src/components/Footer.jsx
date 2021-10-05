@@ -40,7 +40,8 @@ const Footer = ({ filterCompleted, filterActive, filterAll, counterActive, delet
             setColorSelectedClear('white')
         }
     if (counterCompleted===0) {
-        setOpacityClear(0)} else {
+        setOpacityClear(0)} 
+        else {
         setOpacityClear(1)
         }
     }
