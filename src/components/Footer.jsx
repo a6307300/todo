@@ -4,54 +4,53 @@ import '../style.css';
 import ButtonFooter from './ButtonFooter.jsx';
 import styled from "styled-components";
 import { useState } from 'react';
+import { useSelector } from 'react-redux'
+import buttons from "../constants"
+import { useDispatch } from 'react-redux';
+import { clearCompleted } from "../store/tasksSlice"
 
 
+const Footer = ({ counterActive, counterCompleted }) => {
+    const [colorSelectedAll, setColorSelectedAll] = useState('white');
+    const [colorSelectedActive, setColorSelectedActive] = useState('white');
+    const [colorSelectedCompleted, setColorSelectedCompleted] = useState('white');
+    const [opacityClear, setOpacityClear] = useState(0)
 
-const Footer = ({ filterCompleted, filterActive, filterAll, counterActive, deleteAllCompleted, counterCompleted, buttonActive, buttons }) => {
-    const[colorSelectedAll, setColorSelectedAll]=useState('white');
-    const[colorSelectedActive, setColorSelectedActive]=useState('white');
-    const[colorSelectedCompleted, setColorSelectedCompleted]=useState('white');
-    const[colorSelectedClear, setColorSelectedClear]=useState('white');
-    const[opacityClear, setOpacityClear]=useState(0)
+    const buttonsFoot=buttons;
+
+    const buttonOn = useSelector(state => state.tasks.buttonOn);
+
+    const dispatch = useDispatch();
 
     const colorSelection = () => {
-        if (buttonActive===buttons.active) {
+        if (buttonOn === buttons.active) {
             setColorSelectedActive('silver');
             setColorSelectedCompleted('white');
             setColorSelectedAll('white');
-            setColorSelectedClear('white');
         }
-        if (buttonActive===buttons.completed) {
+        if (buttonOn === buttons.completed) {
             setColorSelectedActive('white');
             setColorSelectedCompleted('silver');
             setColorSelectedAll('white');
-            setColorSelectedClear('white');
         }
-        if (buttonActive===buttons.all) { 
+        if (buttonOn === buttons.all) {
             setColorSelectedActive('white');
-            setColorSelectedCompleted('white')
-            setColorSelectedAll('silver')
-            setColorSelectedClear('white')
+            setColorSelectedCompleted('white');
+            setColorSelectedAll('silver');
         }
-        if (buttonActive===buttons.clearCompleted) {
-            setColorSelectedActive('white');
-            setColorSelectedCompleted('white')
-            setColorSelectedAll('silver')
-            setColorSelectedClear('white')
+        if (counterCompleted === 0) {
+            setOpacityClear(0);
         }
-    if (counterCompleted===0) {
-        setOpacityClear(0)} 
         else {
-        setOpacityClear(1)
+            setOpacityClear(1)
         }
     }
-        useEffect(() => {
-            setColorSelectedAll(colorSelection);
-            setColorSelectedCompleted (colorSelection);
-            setColorSelectedAll (colorSelection);
-            setColorSelectedClear (colorSelection);
-            setOpacityClear(colorSelection)
-          }, [buttonActive, counterCompleted])
+    useEffect(() => {
+        setColorSelectedActive(colorSelection);
+        setColorSelectedCompleted(colorSelection);
+        setColorSelectedAll(colorSelection);
+        setOpacityClear(colorSelection)
+    }, [buttonOn, counterCompleted])
 
 
 
@@ -61,16 +60,33 @@ const Footer = ({ filterCompleted, filterActive, filterAll, counterActive, delet
                 {counterActive} items left
             </FooterInfo>
             <FooterButtons>
-                <ButtonFooter opacityClear={1} colorSelected={colorSelectedAll} value={buttons.all} buttons={buttons} functionClick={filterAll} name="All" />
-                <ButtonFooter opacityClear={1} colorSelected={colorSelectedActive} value={buttons.active} buttons={buttons} functionClick={filterActive} name="Active" />
-                <ButtonFooter opacityClear={1} colorSelected={colorSelectedCompleted} value={buttons.completed} buttons={buttons} functionClick={filterCompleted} name="Completed" />
-                <ButtonFooter opacityClear={opacityClear} colorSelected={colorSelectedClear} value={buttons.clearCompleted} buttons={buttons} functionClick={deleteAllCompleted} name={`remove completed ${counterCompleted}`}/>
+                <ButtonFooter
+                    colorSelected={colorSelectedAll}
+                    value={buttonsFoot.all}
+                    name="All"
+
+                />
+                <ButtonFooter
+                    colorSelected={colorSelectedActive}
+                    value={buttonsFoot.active}
+                    name="Active"
+                />
+                <ButtonFooter
+                    colorSelected={colorSelectedCompleted}
+                    value={buttonsFoot.completed}
+                    name="Completed"
+                />
+                <ClearCompletedStyleDiv
+                    opacity={opacityClear}
+                    onClick={() => dispatch(clearCompleted(true))}>
+                    {`remove ${counterCompleted}`}
+                </ClearCompletedStyleDiv>
             </FooterButtons>
         </FooterWrapper>
     );
 }
 
-const FooterWrapper = styled.div `
+const FooterWrapper = styled.div`
     background-color: white;
     width: 550px;
     height: 40px;
@@ -82,8 +98,8 @@ const FooterWrapper = styled.div `
 width: 100%;
     }
     `
-    
-    const FooterInfo = styled.div `
+
+const FooterInfo = styled.div`
     padding-left: 15px;
     padding-top: 10px;
     width: 110px;
@@ -92,9 +108,9 @@ width: 100%;
 width: 20%;
     }
     `
-    
-    const FooterButtons = styled.div `
-    width: 350px;
+
+const FooterButtons = styled.div`
+    width: 300px;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -105,5 +121,12 @@ width: 20%;
 width: 63%;
     }
     `
+const ClearCompletedStyleDiv = styled.div`
+    width: 50px;
+    height: 40px;
+    }
+    `
+
+
 
 export default Footer;

@@ -3,15 +3,32 @@ import ReactDOM from 'react-dom';
 import Task from './Task';
 import '../style.css';
 import styled from "styled-components";
-const TaskList = ({ filteredTasks, deleteTask, changeStatus}) => {
-    return (
+import { useSelector } from 'react-redux'
+import buttons from "../constants"
+
+const TaskList = () => {
+
+  const { tasks, buttonOn} = useSelector(state => state.tasks)
+
+  const filtration = (tasks, buttonOn) => {
+    if (buttonOn == buttons.completed) {
+      return tasks.filter((task) => task.active === false);
+    }
+    if (buttonOn == buttons.active) {
+      return tasks.filter((task) => task.active === true);
+    }
+    if (buttonOn == buttons.all) {
+      return tasks.filter((task) => task.active === true || task.active === false);
+    }
+  }
+
+  return (
     <TasksSpace>
-      {filteredTasks.map((task) => {
+      {filtration (tasks, buttonOn).map((task) => {
         return (
           <Task
+            key={task.id}
             task={task}
-            deleteTask={deleteTask}
-            changeStatus={changeStatus}
           />
         );
       }
@@ -21,7 +38,7 @@ const TaskList = ({ filteredTasks, deleteTask, changeStatus}) => {
   )
 }
 
-const TasksSpace = styled.div `
+const TasksSpace = styled.div`
 background-color: white;
 width: 550px;
 display:flex;

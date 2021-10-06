@@ -22,12 +22,12 @@ const HeaderStyle = styled.div `
 function App() {
 
   return (
-    <body>
+    <BodyStyle>
     <HeaderStyle>
         todos
     </HeaderStyle>
     <CommonForm />
-    </body>
+    </BodyStyle>
   );
 }
 

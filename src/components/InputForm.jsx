@@ -4,6 +4,7 @@ import ButtonAll from './ButtonAll';
 import '../style.css';
 import styled from "styled-components";
 
+
 const InputForm = ({inputText, EnterClick, handleChange, changeStatusAll, buttonAllActive}) => {
     return (
         <InputSpace>

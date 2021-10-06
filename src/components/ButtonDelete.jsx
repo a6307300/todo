@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { deleteTask } from '../store/tasksSlice';
 
 
 
-const ButtonDelete = ({ task, deleteTask, opacityDel }) => {
+const ButtonDelete = ({ id, opacityDel }) => {
+
+const dispatch = useDispatch();
+ 
    return (
       <ContainerImgActive>
         <ImgActive src="images/Del.gif" 
         opacityDel={opacityDel}
-           onClick={() => deleteTask(task.id)}/>
+           onClick={() => dispatch(deleteTask(id))}/>
       </ContainerImgActive>
    )
 }

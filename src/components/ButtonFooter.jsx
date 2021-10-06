@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { changeButtonOn} from "../store/tasksSlice"
 
-const ButtonFooter = ({ name, value, functionClick, colorSelected, opacityClear }) => {
+
+const ButtonFooter = ({ name, value, colorSelected}) => {
+
+    const dispatch = useDispatch();
+
     return (
         <ButtonFooterStyle
             value={value}
-            onClick={functionClick}
             colorSelected={colorSelected}
-            opacityClear={opacityClear}
+            onClick={() => dispatch(changeButtonOn(value))}
             >
             {name}
         </ButtonFooterStyle>

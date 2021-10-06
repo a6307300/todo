@@ -3,34 +3,28 @@ import ReactDOM from 'react-dom';
 import Footer from './Footer.jsx';
 import TaskList from './TaskList';
 import InputForm from './InputForm';
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import '../style.css';
 import styled from "styled-components";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {addTask} from "../store/tasksSlice"
 
 
 const CommonForm = () => {
 
+  const tasks = useSelector(state => state.tasks.tasks)
+  const dispatch = useDispatch();
 
-  const buttons = {
-    all: "all",
-    active: "active",
-    completed: "completed",
-    clearCompleted: "clear completed"
-  }
-  const [tasks, setTasks] = useState([]);
   const [buttonAllActive, setButtonAllActive] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [counterActive, setCounterActive] = useState(tasks.length);
   const [counterCompleted, setCounterCompleted] = useState(0);
-  const [buttonActive, setButtonActive] = useState(buttons.all);
 
   const countActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
     setCounterActive(activeTasks.length)
   }
-
   useEffect(() => {
     setCounterActive(countActive)
   }, [tasks])
@@ -38,33 +32,15 @@ const CommonForm = () => {
   const countCompleted = () => {
     const completedTasks = tasks.filter((task) => task.active === false)
     setCounterCompleted(completedTasks.length)
-    console.log (counterCompleted)
   }
-
   useEffect(() => {
     setCounterCompleted(countCompleted)
   }, [tasks])
 
-
-  useEffect(() => {
-    setFilteredTasks(tasks)
-  }, [tasks])
-
-  const addTask = (inputText) => {
-    if (inputText) {
-      const newTask = {
-        id: tasks.length + 1,
-        name: inputText,
-        active: true,
-      }
-      setTasks(tasks.concat(newTask))
-    }
-  }
   const EnterClick = (e) => {
     if (e.key == "Enter") {
-      addTask(inputText)
+      dispatch(addTask(inputText));
       setInputText("")
-
     }
     if (e.key == "Escape") {
       setInputText("")
@@ -73,49 +49,12 @@ const CommonForm = () => {
   const handleChange = (e) => {
     setInputText(e.currentTarget.value)
   }
-
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id))
-  }
-
-  const changeStatus = (id) => {
-    setTasks(tasks.map((task) =>
-      task.id === id ? { ...task, active: !task.active } : { ...task }
-    )
-    )
-  }
-
   const changeStatusAll = () => {
     tasks.map((task) => {
       task.active = buttonAllActive;
     });
     setButtonAllActive(!buttonAllActive);
-
   }
-
-  const filterCompleted = () => {
-    const completedTasks = tasks.filter((task) => task.active === false)
-    setFilteredTasks(completedTasks)
-    setButtonActive(buttons.completed)
-  }
-
-  const filterActive = () => {
-    const activeTasks = tasks.filter((task) => task.active === true)
-    setFilteredTasks(activeTasks)
-    setButtonActive(buttons.active)
-  }
-
-  const filterAll = () => {
-    const allTasks = tasks.filter((task) => (task.active === true || task.active === false));
-    setFilteredTasks(allTasks)
-    setButtonActive(buttons.all)
-  }
-
-  const deleteAllCompleted = () => {
-    setTasks(tasks.filter((task) => task.active === true))
-    setButtonActive(buttons.clearCompleted)
-  }
-
 
   return (
     <ActiveArea>
@@ -127,26 +66,10 @@ const CommonForm = () => {
           handleChange={handleChange}
           changeStatusAll={changeStatusAll}
         />
-        <TaskList
-          tasks={tasks}
-          filteredTasks={filteredTasks}
-          deleteTask={deleteTask}
-          changeStatus={changeStatus}
-
-
-        />
+        <TaskList />
         <Footer
-          filterCompleted={filterCompleted}
-          filteredTasks={filteredTasks}
-          filterActive={filterActive}
-          filterAll={filterAll}
-          deleteAllCompleted={deleteAllCompleted}
-          buttons={buttons}
-          tasks={tasks}
           counterActive={counterActive}
           counterCompleted={counterCompleted}
-          buttonActive={buttonActive}
-
         />
       </WorkArea>
       <DecorAreaOne>

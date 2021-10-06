@@ -8,10 +8,9 @@ const InputReplace = ({replaceText, EnterClickReplace, changeOccuringDiv, handle
 
     return (
     <StyledInput
-    required
     value={replaceText}
     onChange={handleChangeReplace}
-    onKeyDown={EnterClickReplace, changeOccuringDiv}
+    onKeyDown={EnterClickReplace}
     opacityInput={opacityInput}
     occureInput={occureInput}
     type="text" 

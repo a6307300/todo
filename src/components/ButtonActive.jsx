@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { changeStatus } from '../store/tasksSlice';
 
-const ButtonActive = ({ id, changeStatus, active }) => {  
+const ButtonActive = ({ id, active }) => {  
+
+const dispatch = useDispatch();
+
     if (active) {
         return (
             <ContainerImgActive>
                 <ImgActive
                     src="/images/circle.gif"
-                    onClick={()=> changeStatus(id)} 
+                    onClick={() => dispatch(changeStatus(id))} 
                     />
             </ContainerImgActive>
         )
@@ -18,7 +23,7 @@ const ButtonActive = ({ id, changeStatus, active }) => {
             <ContainerImgActive>
                 <ImgActive
                     src="images/circleDone.gif"
-                    onClick={() => changeStatus(id)}
+                    onClick={() => dispatch(changeStatus(id))} 
                 />
             </ContainerImgActive>
         )
