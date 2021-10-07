@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { changeStatusAll } from '../store/tasksSlice';
 
 let selectorAll = false;
-const ButtonAll = () => {
+const ButtonAll = (markerAll) => {
 
     const dispatch = useDispatch();
     
@@ -20,6 +20,7 @@ const ButtonAll = () => {
     return (
         <ContainerButtonAll>
             <ButtonAllStyle
+            selectorAll={selectorAll}
                 onClick={() => www()}
             >
                 <img src="images/button.jpg" />
@@ -57,7 +58,7 @@ background-repeat: no-repeat;
 background-size: cover;
 background-position: center;
 border-color: transparent;
-opacity: ${(props => props.buttonAllActive) ? 0.3 : 1};
+opacity: ${(props) => props.selectorAll?1:0.3};
 background-color: white;
 `
 

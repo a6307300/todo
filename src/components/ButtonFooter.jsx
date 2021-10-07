@@ -31,10 +31,14 @@ const ButtonFooterStyle = styled.button `
     border-radius: 3px;
     border-color: ${props => props.colorSelected};
     color: #929191;
-    opacity: ${props => props.opacityClear}
     @media (max-width: 599px) {
     width: 100%;
     }
+    &:hover {
+        cursor: pointer;
+    }
+    opacity: ${props => props.opacityClear}
+    
 `
 
 export default ButtonFooter;

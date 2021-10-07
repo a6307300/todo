@@ -2,39 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
-  
 
-const InputReplace = ({replaceText, EnterClickReplace, changeOccuringDiv, handleChangeReplace, occureInput, opacityInput}) => {
+
+const InputReplace = ({ replaceText, show, EnterClickReplace,handleChangeReplace}) => {
+
 
     return (
-    <StyledInput
-    value={replaceText}
-    onChange={handleChangeReplace}
-    onKeyDown={EnterClickReplace}
-    opacityInput={opacityInput}
-    occureInput={occureInput}
-    type="text" 
-    />
-   )
+        <StyledInput
+            value={replaceText}
+            show={show}
+            onChange={handleChangeReplace}
+            onKeyDown={EnterClickReplace}
+            type="text"
+            // onBlur={() => changeOccuringDiv()}
+        />
+    )
 }
 
 const StyledInput = styled.input`
-    width: 470px;
+    width: 485px;
     height: 48px;
     font-size: 24px;
     color: rgb(70, 70, 70);
-    position: absolute;
-    opacity: ${props => props.opacityInput};
-    z-index:${props => props.occureInput};
-    border-color: transparent;
+    display: ${props => props.show ? 'flex' : 'none'};
+    opasity:1:
     background-color: white;
-    @media (max-width: 599px) {
-    width: 80%;
-    &:focus {
-        outline-color: silver;
+    border-width: 1px;
+           outline-color: silver;
         outline-style: solid;
         outline-width: 1px;
-        box-shadow: inset 0px 0px 3px 3px #929191;
+        box-shadow: inset 0px 0px 10px 3px #929191;
+    @media (max-width: 599px) {
+    width: 90%;
     }
 `
 

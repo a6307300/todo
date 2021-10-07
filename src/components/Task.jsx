@@ -9,15 +9,17 @@ import styled from "styled-components";
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { renameTask } from '../store/tasksSlice';
+import { changeSelection } from '../store/tasksSlice';
+import { changeSelectionAll } from '../store/tasksSlice';
 
-const Task = ({ task }) => {
+
+const Task = ({ task}) => {
 
     const [replaceText, setReplaceText] = useState(task.name);
-    const [occureInput, setOccureInput] = useState(0);
-    const [occureDiv, setOccureDiv] = useState(1);
-    const [opacityInput, setOpacityInput] = useState(0)
     const [opacityDel, setOpacityDel] = useState(0)
-
+    const [isShowInput, setIsShowInput] = useState(false)
+    // const selectedTask = useSelector(state => state.tasks.selectedTask)
+    
     const dispatch = useDispatch();
 
     const handleChangeReplace = (e) => {
@@ -30,46 +32,37 @@ const Task = ({ task }) => {
                 nameTarget: replaceText, 
                 idTarget: task.id,
             }));
-            setReplaceText("")
             changeOccuringDiv();
         }
         if (e.key === "Escape") {
-            setReplaceText("")
             changeOccuringDiv();
         }
     }
-
     const changeOccuringInput = () => {
-        setOccureDiv(1);
-        setOccureInput(10);
-        setOpacityInput(1)
+        setIsShowInput(true);
     }
-
-    const changeOpacityDelOn = () => { setOpacityDel(1) }
-    const changeOpacityDelOff = () => { setOpacityDel(0) }
-
 
 
     const changeOccuringDiv = (e) => {
-            setOccureDiv(10);
-            setOccureInput(1);
-            setOpacityInput(0)
+            setIsShowInput(false);
     }
-
     if (task.active === true) {
         return (
             <TaskArea
-                onMouseOver={() => changeOpacityDelOn()}
-                onMouseLeave={() => changeOpacityDelOff()}>
+                onMouseOver={() => setOpacityDel(1)}
+                onMouseLeave={() => setOpacityDel(0)}
+                >
+                
                 <ButtonActive
                     active={true}
                     id={task.id} />
                 <TaskContainer
-                    onClick={() => changeOccuringInput()}>
-                    <TaskText> {task.name}</TaskText>
+                    onDoubleClick={() => {changeOccuringInput()}}
+                    onClick = {() => {changeOccuringDiv()}}
+>
+                    <TaskText show={isShowInput} > {task.name}</TaskText>
                     <InputReplace
-                        opacityInput={opacityInput}
-                        occureInput={occureInput}
+                        show={isShowInput}
                         changeOccuringDiv={changeOccuringDiv}
                         EnterClickReplace={EnterClickReplace}
                         replaceText={replaceText}
@@ -79,23 +72,23 @@ const Task = ({ task }) => {
                 <ButtonDelete
                     id={task.id}
                     opacityDel={opacityDel}
+                    show={isShowInput}
                 />
             </TaskArea>
         )
     } else {
         return (
             <TaskArea
-                onMouseOver={() => changeOpacityDelOn()}
-                onMouseLeave={() => changeOpacityDelOff()}>
+                onMouseOver={() => setOpacityDel(1)}
+                onMouseLeave={() => setOpacityDel(0)}>
                 <ButtonActive
                     active={false}
                     id={task.id} />
                 <TaskContainer
                     onClick={() => changeOccuringInput()}>
-                    <TaskTextCompleted> {task.name}</TaskTextCompleted>
+                    <TaskTextCompleted show={isShowInput} > {task.name}</TaskTextCompleted>
                     <InputReplace
-                        opacityInput={opacityInput}
-                        occureInput={occureInput}
+                        show={isShowInput}
                         changeOccuringDiv={changeOccuringDiv}
                         EnterClickReplace={EnterClickReplace}
                         replaceText={replaceText}
@@ -105,6 +98,7 @@ const Task = ({ task }) => {
                 <ButtonDelete
                     id={task.id}
                     opacityDel={opacityDel}
+                    show={isShowInput}
                 />
             </TaskArea>
         )
@@ -135,10 +129,9 @@ width: 80%;
 `
 
 const TaskText = styled.div`
-    position: absolute;
     padding-top: 14px;
     padding-left: 4px;
-    z-index: ${props => props.occureDiv};
+    display: ${ props => props.show ? 'none' : 'flex' };
     opacity: 1;
     background-color: white;
     width: 440px;
@@ -148,16 +141,16 @@ const TaskText = styled.div`
     width: 80%;
     `
 const TaskTextCompleted = styled.div`
-    position: absolute;
     padding-top: 14px;
     padding-left: 4px;
-    z-index: ${props => props.occureDiv};
+    display: ${ props => props.show ? 'none' : 'flex' };
     opacity: 1;
     background-color: white;
-    width: 450px;
-    min-height: 60px;
+    width: 440px;
+    min-height: 44px;
     color: #d9d9d9;
     text-decoration: line-through;
+    white-space: pre-wrap;
     @media (max-width: 599px) {
     width: 80%;
     `

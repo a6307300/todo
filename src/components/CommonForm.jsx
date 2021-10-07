@@ -8,17 +8,20 @@ import styled from "styled-components";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {addTask} from "../store/tasksSlice"
+import {changeSelectedTask} from "../store/tasksSlice"
 
 
 const CommonForm = () => {
 
   const tasks = useSelector(state => state.tasks.tasks)
+  const selectedTask = useSelector(state => state.tasks.selectedTask)
   const dispatch = useDispatch();
 
   const [buttonAllActive, setButtonAllActive] = useState(false);
   const [inputText, setInputText] = useState("");
   const [counterActive, setCounterActive] = useState(tasks.length);
   const [counterCompleted, setCounterCompleted] = useState(0);
+
 
   const countActive = () => {
     const activeTasks = tasks.filter((task) => task.active === true)
@@ -50,12 +53,6 @@ const CommonForm = () => {
   const handleChange = (e) => {
     setInputText(e.currentTarget.value)
   }
-  const changeStatusAll = () => {
-    tasks.map((task) => {
-      task.active = buttonAllActive;
-    });
-    setButtonAllActive(!buttonAllActive);
-  }
 
   return (
     <ActiveArea>
@@ -65,7 +62,6 @@ const CommonForm = () => {
           inputText={inputText}
           EnterClick={EnterClick}
           handleChange={handleChange}
-          changeStatusAll={changeStatusAll}
         />
         <TaskList />
         <Footer

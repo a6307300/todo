@@ -16,7 +16,7 @@ const Footer = ({ counterActive, counterCompleted }) => {
     const [colorSelectedCompleted, setColorSelectedCompleted] = useState('white');
     const [opacityClear, setOpacityClear] = useState(0)
 
-    const buttonsFoot=buttons;
+    const buttonsFoot = buttons;
 
     const buttonOn = useSelector(state => state.tasks.buttonOn);
 
@@ -127,12 +127,15 @@ const ClearCompletedStyleDiv = styled.div`
     width: 50px;
     height: 40px;
     text-align: center;
-    opacity: ${props => props.counterCompleted>0?1:0};
+    opacity: ${props => props.counterCompleted > 0 ? 1 : 0};
+    &:hover {
+        cursor: pointer;
+    }
     @media (max-width: 599px) {
 width: 50px;
 font-size: 10px;
 padding-right:10px;
-    `
+`
 
 
 

@@ -25,12 +25,11 @@ width: 50px;
 height: 50px;
 `
 const ImgActive = styled.img `
-position:absolute;
-width: 45px;
+width: 40px;
 padding-top: 6px;
 padding-left: 0px;
 opacity: ${props => props.opacityDel};
-z-index: 9;
+
 `
 
 
