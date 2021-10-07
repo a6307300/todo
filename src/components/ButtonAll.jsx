@@ -4,32 +4,45 @@ import '../style.css';
 import styled from "styled-components";
 import { useState } from 'react';
 import ButtonActive from './ButtonActive';
-import { useDispatch } from 'react';
+import { useDispatch } from 'react-redux';
 import { changeStatusAll } from '../store/tasksSlice';
 
+let selectorAll = false;
+const ButtonAll = () => {
 
-
-const ButtonAll = ({ buttonAllActive }) => {
-
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     
-    // let selectorAll = false;
-    
-    // const changeStatusAllComplex = () => {
-    // dispatch(changeStatusAll(selectorAll));
-    // selectorAll = !selectorAll;
-    // }
+    const www = () => {
+    dispatch(changeStatusAll(selectorAll));
+    selectorAll=!selectorAll;
+    }
 
     return (
         <ContainerButtonAll>
             <ButtonAllStyle
-                onClick={() => dispatch(changeStatusAll(false))}
+                onClick={() => www()}
             >
                 <img src="images/button.jpg" />
             </ButtonAllStyle>
         </ContainerButtonAll>
     );
 }
+
+// const ButtonAll = () => {
+
+//     const dispatch = useDispatch();
+    
+//     let selectorAll = false;
+//     return (
+//         <ContainerButtonAll>
+//             <ButtonAllStyle
+//                 onClick={() => dispatch(changeStatusAll(selectorAll))}
+//             >
+//                 <img src="images/button.jpg" />
+//             </ButtonAllStyle>
+//         </ContainerButtonAll>
+//     );
+// }
 
 
 const ContainerButtonAll = styled.div`

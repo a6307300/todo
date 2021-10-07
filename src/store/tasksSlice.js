@@ -35,7 +35,9 @@ const tasksSlice = createSlice({
             state.buttonOn = action.payload;
         },
         changeStatusAll(state, action) {
-            state.tasks=state.tasks.map(task => task.active = action.payload);
+            state.tasks.forEach((task) => task.active=action.payload);
+            
+
         },
 
     },

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Task from './Task';
-import '../style.css';
 import styled from "styled-components";
 import { useSelector } from 'react-redux'
 import buttons from "../constants"

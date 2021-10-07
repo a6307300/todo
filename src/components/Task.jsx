@@ -34,7 +34,8 @@ const Task = ({ task }) => {
             changeOccuringDiv();
         }
         if (e.key === "Escape") {
-            setOccureDiv(1);
+            setReplaceText("")
+            changeOccuringDiv();
         }
     }
 
@@ -132,16 +133,7 @@ font-size: 24px;
 @media (max-width: 599px) {
 width: 80%;
 `
-const TaskTextReplace = styled.div`
-width: 450px;
-min-height: 60px;
-font-size: 24px;
-position: absolute;
-opacity: 0;
-z-index:1;
-@media (max-width: 599px) {
-width: 80%;
-`
+
 const TaskText = styled.div`
     position: absolute;
     padding-top: 14px;
@@ -150,8 +142,10 @@ const TaskText = styled.div`
     opacity: 1;
     background-color: white;
     width: 440px;
-    min-height: 46px;
-
+    min-height: 44px;
+    white-space: pre-wrap;
+    @media (max-width: 599px) {
+    width: 80%;
     `
 const TaskTextCompleted = styled.div`
     position: absolute;
@@ -164,6 +158,17 @@ const TaskTextCompleted = styled.div`
     min-height: 60px;
     color: #d9d9d9;
     text-decoration: line-through;
+    @media (max-width: 599px) {
+    width: 80%;
     `
-
+    const TaskTextReplace = styled.div`
+width: 450px;
+min-height: 60px;
+font-size: 24px;
+position: absolute;
+opacity: 0;
+z-index:1;
+@media (max-width: 599px) {
+width: 80%;
+`
 export default Task;

@@ -20,7 +20,7 @@ const InputReplace = ({replaceText, EnterClickReplace, changeOccuringDiv, handle
 
 const StyledInput = styled.input`
     width: 470px;
-    min-height: 48px;
+    height: 48px;
     font-size: 24px;
     color: rgb(70, 70, 70);
     position: absolute;
@@ -28,6 +28,8 @@ const StyledInput = styled.input`
     z-index:${props => props.occureInput};
     border-color: transparent;
     background-color: white;
+    @media (max-width: 599px) {
+    width: 80%;
     &:focus {
         outline-color: silver;
         outline-style: solid;

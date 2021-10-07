@@ -4,7 +4,6 @@ import Footer from './Footer.jsx';
 import TaskList from './TaskList';
 import InputForm from './InputForm';
 import { useState } from 'react';
-import '../style.css';
 import styled from "styled-components";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -39,8 +38,10 @@ const CommonForm = () => {
 
   const EnterClick = (e) => {
     if (e.key == "Enter") {
+      if (inputText!==""){
       dispatch(addTask(inputText));
       setInputText("")
+      }
     }
     if (e.key == "Escape") {
       setInputText("")

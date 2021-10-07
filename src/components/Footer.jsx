@@ -77,9 +77,10 @@ const Footer = ({ counterActive, counterCompleted }) => {
                     name="Completed"
                 />
                 <ClearCompletedStyleDiv
+                    counterCompleted={counterCompleted}
                     opacity={opacityClear}
                     onClick={() => dispatch(clearCompleted(true))}>
-                    {`remove ${counterCompleted}`}
+                    {`clear ${counterCompleted} completed`}
                 </ClearCompletedStyleDiv>
             </FooterButtons>
         </FooterWrapper>
@@ -105,7 +106,8 @@ const FooterInfo = styled.div`
     width: 110px;
     height: 40px;
     @media (max-width: 599px) {
-width: 20%;
+width: 25%;
+font-size: 10px;
     }
     `
 
@@ -114,17 +116,22 @@ const FooterButtons = styled.div`
     height: 40px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding-left: 55px;
     @media (max-width: 599px) {
-width: 63%;
+width: 90%;
     }
     `
 const ClearCompletedStyleDiv = styled.div`
     width: 50px;
     height: 40px;
-    }
+    text-align: center;
+    opacity: ${props => props.counterCompleted>0?1:0};
+    @media (max-width: 599px) {
+width: 50px;
+font-size: 10px;
+padding-right:10px;
     `
 
 
