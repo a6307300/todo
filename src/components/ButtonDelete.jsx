@@ -32,5 +32,4 @@ opacity: ${props => props.opacityDel};
 
 `
 
-
 export default ButtonDelete;

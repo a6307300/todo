@@ -21,7 +21,6 @@ const ButtonFooter = ({ name, value, colorSelected}) => {
     );
 }
 
-
 const ButtonFooterStyle = styled.button `
     width: auto;
     min-height: 35px;
@@ -40,5 +39,4 @@ const ButtonFooterStyle = styled.button `
     opacity: ${props => props.opacityClear}
     
 `
-
 export default ButtonFooter;

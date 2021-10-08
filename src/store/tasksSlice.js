@@ -14,7 +14,6 @@ const tasksSlice = createSlice({
                 id: state.tasks.length,
                 name: action.payload,
                 active: true,
-                selected: false,
             })
         },
         deleteTask(state, action) {
@@ -39,14 +38,8 @@ const tasksSlice = createSlice({
         changeStatusAll(state, action) {
             state.tasks.forEach((task) => task.active=action.payload);
         },
-        changeSelection(state, action) {
-            state.tasks.find(task => task.id === action.payload).selected = !state.tasks.find(task => task.id === action.payload).selected;
-        },
-        changeSelectionAll(state, action) {
-            state.tasks.forEach((task) => task.selected=false);
-        },
     },
 })
 
-export const { changeSelection, changeSelectionAll, addTask, deleteTask, changeStatus, changeButtonOn, clearCompleted, renameTask, changeStatusAll } = tasksSlice.actions;
+export const { addTask, deleteTask, changeStatus, changeButtonOn, clearCompleted, renameTask, changeStatusAll } = tasksSlice.actions;
 export default tasksSlice.reducer

@@ -2,49 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.css';
 import styled from "styled-components";
-import { useState } from 'react';
-import ButtonActive from './ButtonActive';
 import { useDispatch } from 'react-redux';
 import { changeStatusAll } from '../store/tasksSlice';
 
 let selectorAll = false;
-const ButtonAll = (markerAll) => {
-
+const ButtonAll = () => {
     const dispatch = useDispatch();
     
-    const www = () => {
+    const changingAllStatuses = () => {
     dispatch(changeStatusAll(selectorAll));
     selectorAll=!selectorAll;
     }
-
     return (
         <ContainerButtonAll>
             <ButtonAllStyle
             selectorAll={selectorAll}
-                onClick={() => www()}
+                onClick={() => changingAllStatuses()}
             >
                 <img src="images/button.jpg" />
             </ButtonAllStyle>
         </ContainerButtonAll>
     );
 }
-
-// const ButtonAll = () => {
-
-//     const dispatch = useDispatch();
-    
-//     let selectorAll = false;
-//     return (
-//         <ContainerButtonAll>
-//             <ButtonAllStyle
-//                 onClick={() => dispatch(changeStatusAll(selectorAll))}
-//             >
-//                 <img src="images/button.jpg" />
-//             </ButtonAllStyle>
-//         </ContainerButtonAll>
-//     );
-// }
-
 
 const ContainerButtonAll = styled.div`
 width: 55px;
@@ -60,9 +39,8 @@ background-position: center;
 border-color: transparent;
 opacity: ${(props) => props.selectorAll?1:0.3};
 background-color: white;
+&:hover {
+        cursor: pointer;
+    }
 `
-
-
-
-
 export default ButtonAll;

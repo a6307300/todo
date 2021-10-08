@@ -4,13 +4,10 @@ import Task from './Task';
 import styled from "styled-components";
 import { useSelector } from 'react-redux'
 import buttons from "../constants"
-import { useState } from 'react';
-import {changeSelectedTask} from '../store/tasksSlice';
 
 const TaskList = () => {
 
   const { tasks, buttonOn} = useSelector(state => state.tasks)
-  // const [isFocusedTask, setIsFocusedTask] = useState(0);
 
   const filtration = (tasks, buttonOn) => {
     if (buttonOn == buttons.completed) {
@@ -26,15 +23,12 @@ const TaskList = () => {
 
   return (
     <TasksSpace
-    // onClick = {() => changeSelectedTask(Math.random())}
     >
       {filtration (tasks, buttonOn).map((task) => {
         return (
           <Task
             key={task.id}
             task={task}
-            // setIsFocusedTask={setIsFocusedTask}
-            // isFocusedTask={isFocusedTask}
           />
         );
       }

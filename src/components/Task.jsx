@@ -6,11 +6,8 @@ import ButtonDelete from './ButtonDelete';
 import InputReplace from './InputReplace';
 import { useState } from 'react';
 import styled from "styled-components";
-import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { renameTask } from '../store/tasksSlice';
-import { changeSelection } from '../store/tasksSlice';
-import { changeSelectionAll } from '../store/tasksSlice';
 
 
 const Task = ({ task}) => {
@@ -18,7 +15,6 @@ const Task = ({ task}) => {
     const [replaceText, setReplaceText] = useState(task.name);
     const [opacityDel, setOpacityDel] = useState(0)
     const [isShowInput, setIsShowInput] = useState(false)
-    // const selectedTask = useSelector(state => state.tasks.selectedTask)
     
     const dispatch = useDispatch();
 
@@ -51,14 +47,16 @@ const Task = ({ task}) => {
             <TaskArea
                 onMouseOver={() => setOpacityDel(1)}
                 onMouseLeave={() => setOpacityDel(0)}
+                tabIndex={2}
                 >
                 
                 <ButtonActive
                     active={true}
                     id={task.id} />
                 <TaskContainer
-                    onDoubleClick={() => {changeOccuringInput()}}
-                    onClick = {() => {changeOccuringDiv()}}
+                    tabIndex={1}
+                    onClick={() => {changeOccuringInput()}}
+                    onBlur={() => changeOccuringDiv()}
 >
                     <TaskText show={isShowInput} > {task.name}</TaskText>
                     <InputReplace
